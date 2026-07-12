@@ -1,6 +1,6 @@
 # Accumulator Options Trading App
 
-A self-h    osted accumulator options trading app built on the Deriv WebSocket API. Your stake grows at a chosen growth rate for every tick the spot price stays within the barrier range.
+A self-h  osted accumulator options trading app built on the Deriv WebSocket API. Your stake grows at a chosen growth rate for every tick the spot price stays within the barrier range.
 
 ## Prerequisites
 
