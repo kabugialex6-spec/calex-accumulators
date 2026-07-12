@@ -1,7 +1,10 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { Activity } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Footer } from '@/components/custom/footer';
 import { Header } from '@/components/custom/header';
 import { ThemeToggle } from '@/components/custom/theme-toggle';
