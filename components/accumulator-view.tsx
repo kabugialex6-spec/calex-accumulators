@@ -187,7 +187,17 @@ export function AccumulatorView({
         onSwitchAccount={onSwitchAccount}
         logoSrc={logoSrc}
         appName={appName}
-        actions={<ThemeToggle />}
+        actions={
+          <>
+            <Link href="/digit-pulse">
+              <Button variant="ghost" size="sm" className="gap-1.5">
+                <Activity className="h-4 w-4" />
+                <span className="hidden sm:inline">Digit Pulse</span>
+              </Button>
+            </Link>
+            <ThemeToggle />
+          </>
+        }
       />
       {/* Spacer to push content below fixed header — taller when authenticated (account bar visible) */}
       <div className={authState === 'authenticated' ? 'h-[76px] shrink-0' : 'h-[66px] shrink-0'} />
