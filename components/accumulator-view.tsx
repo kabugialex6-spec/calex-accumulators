@@ -12,6 +12,9 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { useContractMarkers } from '@/hooks/use-contract-markers';
 import { TradeControls } from './trade-controls';
+import { RiskStatusBar } from '@/components/custom/risk-status-bar';
+import { MarketConditionsPanel } from '@/components/custom/market-conditions-panel';
+import type { DailyRiskLimit } from '@/hooks/use-daily-risk-limit';
 import type { ChartBarrier } from '@/components/custom/smart-chart';
 import type {
   AuthState,
@@ -68,6 +71,10 @@ export interface AccumulatorViewProps {
   buyResult: BuyResult | null;
   buyError: string | null;
   clearBuyResult: () => void;
+  /** Recent raw price history — used for the market conditions readout. */
+  prices: number[];
+  /** Daily loss-limit tracking, computed from real closed trades. */
+  risk: DailyRiskLimit;
 
   // Positions
   openPositions: OpenPosition[];
@@ -115,6 +122,8 @@ export function AccumulatorView({
   buyResult,
   buyError,
   clearBuyResult,
+  prices,
+  risk,
   openPositions,
   sellContract,
   sellingId,
@@ -231,6 +240,7 @@ export function AccumulatorView({
 
           {/* Column 2: Trade controls in a Card */}
           <div className="max-lg:flex-1 max-lg:min-h-0 max-lg:overflow-y-auto max-lg:overscroll-contain max-lg:border-t max-lg:border-border max-lg:pt-3 max-lg:pb-24 lg:pt-0 flex flex-col gap-3">
+            <RiskStatusBar risk={risk} />
             {isLoading ? (
               <Skeleton className="lg:h-[min(33.6rem,66vh)] lg:min-h-[384px] max-lg:h-48 w-full rounded-xl" />
             ) : (
@@ -255,10 +265,12 @@ export function AccumulatorView({
                     onClose={sellContract}
                     isClosing={sellingId === activeAccuPosition?.contract_id}
                     isAuthenticated={authState === 'authenticated'}
+                    isRiskLocked={risk.isLocked}
                   />
                 </CardContent>
               </Card>
             )}
+            <MarketConditionsPanel prices={prices} proposal={proposal} />
           </div>
         </div>
       </div>
