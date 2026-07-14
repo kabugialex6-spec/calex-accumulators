@@ -35,6 +35,8 @@ interface TradeControlsProps {
   isClosing?: boolean;
   /** Whether the user is authenticated — shows the View your positions link when true. */
   isAuthenticated?: boolean;
+  /** When true, Buy is disabled because the daily loss limit was reached. */
+  isRiskLocked?: boolean;
 }
 
 export function TradeControls({
@@ -56,6 +58,7 @@ export function TradeControls({
   onClose,
   isClosing,
   isAuthenticated,
+  isRiskLocked,
 }: TradeControlsProps) {
   useEffect(() => {
     if (buyError) {
@@ -232,10 +235,10 @@ export function TradeControls({
           <Button
             className="w-full rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
             size="lg"
-            disabled={!isConnected || !proposal || isBuying}
+            disabled={!isConnected || !proposal || isBuying || isRiskLocked}
             onClick={onBuy}
           >
-            {isBuying ? 'Purchasing...' : 'Buy'}
+            {isRiskLocked ? 'Daily limit reached' : isBuying ? 'Purchasing...' : 'Buy'}
           </Button>
         )}
 
