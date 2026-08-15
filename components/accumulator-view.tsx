@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Activity } from 'lucide-react';
+import { Activity, LineChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Footer } from '@/components/custom/footer';
@@ -202,6 +202,12 @@ export function AccumulatorView({
               <Button variant="ghost" size="sm" className="gap-1.5">
                 <Activity className="h-4 w-4" />
                 <span className="hidden sm:inline">Digit Pulse</span>
+              </Button>
+            </Link>
+            <Link href="/analyzer">
+              <Button variant="ghost" size="sm" className="gap-1.5">
+                <LineChart className="h-4 w-4" />
+                <span className="hidden sm:inline">Analyzer</span>
               </Button>
             </Link>
             <ThemeToggle />
