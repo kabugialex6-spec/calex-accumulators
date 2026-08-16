@@ -456,7 +456,7 @@ export default function AnalyzerPage() {
     <div className="analyzer-root" style={cssVars}>
       <div className="wrap">
         <h1>Trade analyzer</h1>
-        <p className="sub">Rule-based signal scanner on live Deriv price data \u2014 trend, zones, candle patterns, and EMA momentum. Not a prediction. Verify every signal yourself before trading.</p>
+        <p className="sub">Rule-based signal scanner on live Deriv price data — trend, zones, candle patterns, and EMA momentum. Not a prediction. Verify every signal yourself before trading.</p>
 
         <div className="panel">
           <div className="controls">
@@ -516,7 +516,7 @@ export default function AnalyzerPage() {
               {signalResult && (
                 <>
                   <ChecklistItem ok={signalResult.trend.dir === 'up' || signalResult.trend.dir === 'down'}>
-                    Trend: <b>{signalResult.trend.dir}</b> \u2014 {signalResult.trend.reason}
+                    Trend: <b>{signalResult.trend.dir}</b> — {signalResult.trend.reason}
                   </ChecklistItem>
                   <ChecklistItem ok={!!signalResult.nearZone}>
                     {signalResult.nearZone
@@ -539,7 +539,7 @@ export default function AnalyzerPage() {
         </div>
 
         <div className="panel">
-          <p className="panel-title">Backtest \u2014 how these rules would&apos;ve performed on the loaded history</p>
+          <p className="panel-title">Backtest — how these rules would&apos;ve performed on the loaded history</p>
           <div className="controls" style={{ marginBottom: 10 }}>
             <button className="secondary" onClick={runBacktest}>Run backtest on loaded candles</button>
           </div>
@@ -564,7 +564,7 @@ export default function AnalyzerPage() {
             </div>
           )}
           {backtestTrades && (
-            <p className="note">Each trade is scored on price movement 10 candles after the signal, vs a \u00b10.1% threshold. Rough approximation \u2014 no spread, slippage, or stop-loss placement is modeled.</p>
+            <p className="note">Each trade is scored on price movement 10 candles after the signal, vs a ±0.1% threshold. Rough approximation — no spread, slippage, or stop-loss placement is modeled.</p>
           )}
         </div>
       </div>
