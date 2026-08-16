@@ -171,7 +171,6 @@ function ChecklistItem({ ok, children }: { ok: boolean; children: ReactNode }) {
 
 // ---------- Page ----------
 export default function AnalyzerPage() {
-  const [appId, setAppId] = useState('1089');
   const [symbols, setSymbols] = useState<SymbolOption[]>(FALLBACK_SYMBOLS);
   const [symbolsLoading, setSymbolsLoading] = useState(true);
   const [symbol, setSymbol] = useState('R_75');
@@ -204,7 +203,7 @@ export default function AnalyzerPage() {
   // Fetch the live, current symbol list from Deriv so the dropdown can never go stale.
   useEffect(() => {
     let cancelled = false;
-    const lookupSocket = new WebSocket('wss://ws.derivws.com/websockets/v3?app_id=1089');
+    const lookupSocket = new WebSocket('wss://api.derivws.com/trading/v1/options/ws/public');
     const timeout = setTimeout(() => { if (!cancelled) { setSymbolsLoading(false); lookupSocket.close(); } }, 8000);
 
     lookupSocket.onopen = () => {
@@ -338,7 +337,7 @@ export default function AnalyzerPage() {
       Notification.requestPermission();
     }
 
-    const socket = new WebSocket(`wss://ws.derivws.com/websockets/v3?app_id=${appId || '1089'}`);
+    const socket = new WebSocket('wss://api.derivws.com/trading/v1/options/ws/public');
     wsRef.current = socket;
 
     socket.onopen = () => {
@@ -461,10 +460,6 @@ export default function AnalyzerPage() {
 
         <div className="panel">
           <div className="controls">
-            <div className="field">
-              <label>App ID</label>
-              <input value={appId} onChange={e => setAppId(e.target.value)} style={{ width: 90 }} />
-            </div>
             <div className="field">
               <label>Symbol {symbolsLoading ? '(loading live list\u2026)' : ''}</label>
               <select value={symbol} onChange={e => setSymbol(e.target.value)} style={{ minWidth: 220 }}>
